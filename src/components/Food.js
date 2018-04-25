@@ -39,7 +39,7 @@ handleSubmit(e){
     e.preventDefault();
     
     var config ={
-    headers: {'X-Mashape-Key': 'ADD KEY HERE'},
+    headers: {'X-Mashape-Key': 'sb7yRE1EkumshkKQaBfg6WrQFbsxp1U1JpCjsnuXQjzsuDMDaH'},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
