@@ -6,6 +6,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+
 class Food extends Component {
     constructor(props) {
         super(props);
@@ -15,11 +16,16 @@ class Food extends Component {
             number: 5,
             ranking: 1, 
             Data: [],
-            foodID:939682,
+            foodID:[],
             includeNutrition:'',
-            recipeData:[]
+            recipeData:[],
             
         };
+
+       
+
+
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -39,7 +45,7 @@ handleSubmit(e){
     e.preventDefault();
     
     var config ={
-    headers: {'X-Mashape-Key': 'ADD KEY HERE'},
+    headers: {'X-Mashape-Key': ''},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
@@ -51,19 +57,46 @@ handleSubmit(e){
     axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
     ).then((response) => {
       console.log(response.data);
-      console.log(response.data.id);
+      console.log(response.data[0].id);
+      console.log(response.id);
+      var numberOfItems = this.state.number;
+      var arr = [];
+      for(var i=0; i<numberOfItems;i++){
+            arr.push(response.data[i].id);
+      
+      }
       this.setState({
           Data: response.data,
-    
+          foodID:arr,
       });
-        
+    
+    
+        console.log(this.state.foodID);
+        console.log(this.state.Data);
       }).catch(function (error) {
         console.log(error);
       });
-    
+
+
+      var config1 ={
+        headers: {'X-Mashape-Key': 'gzdtzbN4ozmshjZWkJVE1yakmaLFp1sHRQMjsnRNHdvGkC5BPW'},
         
-    
-    
+        
+    }
+        
+        axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + this.state.foodID + "/information", config1
+        ).then((response) => {
+          console.log(response.data);
+          console.log(response.data.id);
+          this.setState({
+              recipeData: response.data,
+          });
+            console.log('RecipeData is' + this.state.recipeData);
+            console.log(this.state.recipeData)
+          }).catch(function (error) {
+            console.log(error);
+          });
+     
   }
 
 
@@ -85,8 +118,6 @@ handleSubmit(e){
         
         <div>
             {this.state.Data.map((data,index)=> 
-    
-                
              <Card key = {index} style ={styles} >
              <CardHeader> {data.title}
                <CardMedia> 
