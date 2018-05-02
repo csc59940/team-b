@@ -1,0 +1,10 @@
+#navHeader {
+	background-color: #ffbd4a;
+	font-family: 'Alfa Slab One', cursive;
+}
+
+#brand, #brand:focus, #brand:hover, #brand:active {
+  outline: 0 !important;
+  border: none;
+}
+
