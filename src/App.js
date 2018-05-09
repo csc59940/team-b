@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import Food from './components/Food';
+import Main from './components/Main';
+import Header from './components/Header';
 
 
 class App extends Component {
@@ -12,13 +10,9 @@ class App extends Component {
     
   render() {
     return (
-      <div >
-       
-         <MuiThemeProvider>
-         <Food/>
-         
-        
-         </MuiThemeProvider>
+      <div > 
+         	<Header />
+         	<Main />
       </div>
         
         
