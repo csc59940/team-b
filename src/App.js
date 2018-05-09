@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Food from './components/Food';
 
+
 class App extends Component {
     
     
@@ -14,7 +15,7 @@ class App extends Component {
        
          <MuiThemeProvider>
          <Food/>
-   
+         
         
          </MuiThemeProvider>
       </div>
