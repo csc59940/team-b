@@ -12,6 +12,7 @@ import Recipe from './Recipe.js';
 import './Food.css';
 import stock from '../images/stock.webp';
 import stock2 from '../images/stock2.webp';
+import Typography from 'material-ui/Typography';
 
 class Food extends Component {
     constructor(props) {
@@ -58,8 +59,6 @@ handleSubmit(e){
       }
 }
 
-
-    
     axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
     ).then((response) => {
       console.log(response.data);
@@ -76,13 +75,12 @@ handleSubmit(e){
         console.log(error);
       });
 
-
-     
   }
 getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
     console.log(this.state.Data[index[0]].id);
    }
+
 getInstructions(e){
   e.preventDefault();
   this.setState({
@@ -100,6 +98,10 @@ getInstructions(e){
         if(this.state.page ==='selectIngredient'){
     return (    
       <div >
+        
+        <div className="title-bar">
+        <Typography variant ='display4'><strong>hello</strong></Typography>
+        </div>
          <img src={stock} className ='homeBackground' alt="Stock-Image" data-aos="fade-up"/>
         <TextField
             floatingLabelText="Ingredients" 
@@ -117,18 +119,24 @@ getInstructions(e){
     else if (this.state.page === 'ingredientSubmitted'){
       return(
           <div >
+            
           <img src={stock2} className ='homeBackground' alt="Stock-Image" data-aos="fade-up"/>
             <Table onRowSelection = {this.getIngredientID}>
               <TableHeader>
                 <TableRow>
                   <TableHeaderColumn>Recipe Title</TableHeaderColumn>
+                  <TableHeaderColumn>Image</TableHeaderColumn>
+                  <TableHeaderColumn>Likes</TableHeaderColumn>
+                  <TableHeaderColumn># Of Ingredients You Have </TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody deselectOnClickaway={false}>
                 {this.state.Data.map((data,index)=>
                   <TableRow key = {index} value = {data.id}>
                   <TableRowColumn>{data.title} </TableRowColumn>
-                  
+                  <TableRowColumn><img src ={data.image} /> </TableRowColumn>
+                  <TableRowColumn>{data.likes} </TableRowColumn>
+                  <TableRowColumn>{data.missedIngredientCount}</TableRowColumn>
                   </TableRow>
                 )}
               </TableBody>

@@ -17,8 +17,7 @@ class Recipe extends Component {
         this.state = {
             Data:'',
         };
-    
-
+        
         var config ={
             headers: {'X-Mashape-Key': 'INSERT KEY'},
         }
