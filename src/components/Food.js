@@ -12,7 +12,7 @@ import Recipe from './Recipe.js';
 import './Food.css';
 import stock from '../images/stock.webp';
 import stock2 from '../images/stock2.webp';
-import Typography from 'material-ui/Typography';
+
 
 class Food extends Component {
     constructor(props) {
@@ -50,7 +50,7 @@ handleSubmit(e){
     e.preventDefault();
     
     var config ={
-    headers: {'X-Mashape-Key': 'gzdtzbN4ozmshjZWkJVE1yakmaLFp1sHRQMjsnRNHdvGkC5BPW'},
+    headers: {'X-Mashape-Key': ''},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
@@ -75,6 +75,17 @@ handleSubmit(e){
         console.log(error);
       });
 
+      const itemsRef = firebase.database().ref('TestByMelvin');
+      const item = {
+      ingredients: this.state.ingredients
+  }
+      itemsRef.push(item);
+      this.setState({
+      ingredients:''
+  });
+ 
+
+
   }
 getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
@@ -98,17 +109,15 @@ getInstructions(e){
         if(this.state.page ==='selectIngredient'){
     return (    
       <div >
-        
-        <div className="title-bar">
-        <Typography variant ='display4'><strong>hello</strong></Typography>
-        </div>
+      
          <img src={stock} className ='homeBackground' alt="Stock-Image" data-aos="fade-up"/>
         <TextField
+            style={{marginLeft:'475px', width:'500px'}}
             floatingLabelText="Ingredients" 
             name="ingredients" 
             floatingLabelText="Your Ingredients" 
             floatingLabelFixed={true} 
-            hintText="Choose an ingredient"
+            hintText="List Your Ingredients"
             onChange={this.handleChange}/>
                 
             <FlatButton label="Search" primary={true} onClick={this.handleSubmit}  data-aos="fade-up"/>
