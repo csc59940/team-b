@@ -9,6 +9,9 @@ import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} f
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
 import Recipe from './Recipe.js';
+import './Food.css';
+import stock from '../images/stock.webp';
+import stock2 from '../images/stock2.webp';
 
 class Food extends Component {
     constructor(props) {
@@ -46,7 +49,7 @@ handleSubmit(e){
     e.preventDefault();
     
     var config ={
-    headers: {'X-Mashape-Key': 'INSERT KEY'},
+    headers: {'X-Mashape-Key': 'gzdtzbN4ozmshjZWkJVE1yakmaLFp1sHRQMjsnRNHdvGkC5BPW'},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
@@ -97,18 +100,25 @@ getInstructions(e){
         if(this.state.page ==='selectIngredient'){
     return (    
       <div >
+         <img src={stock} className ='homeBackground' alt="Stock-Image" data-aos="fade-up"/>
         <TextField
-            floatingLabelText="Ingredients" name="ingredients" floatingLabelText="Your Ingredients" floatingLabelFixed={true} hintText="Choose an ingredient"  onChange={this.handleChange}/>
+            floatingLabelText="Ingredients" 
+            name="ingredients" 
+            floatingLabelText="Your Ingredients" 
+            floatingLabelFixed={true} 
+            hintText="Choose an ingredient"
+            onChange={this.handleChange}/>
                 
-            <FlatButton label="Search" primary={true} onClick={this.handleSubmit}/>
+            <FlatButton label="Search" primary={true} onClick={this.handleSubmit}  data-aos="fade-up"/>
         
       </div>
       );
     }
     else if (this.state.page === 'ingredientSubmitted'){
       return(
-          <div data-aos = "fade-up">
-            <Table  onRowSelection = {this.getIngredientID}>
+          <div >
+          <img src={stock2} className ='homeBackground' alt="Stock-Image" data-aos="fade-up"/>
+            <Table onRowSelection = {this.getIngredientID}>
               <TableHeader>
                 <TableRow>
                   <TableHeaderColumn>Recipe Title</TableHeaderColumn>

@@ -8,6 +8,8 @@ import FlatButton from 'material-ui/FlatButton';
 import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} from 'material-ui/Table';
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
+import './Recipe.css';
+import stock3 from '../images/stock3.webp';
 
 class Recipe extends Component {
     constructor(props) {
@@ -34,9 +36,6 @@ class Recipe extends Component {
         
   }
 
-    
-
-    
   render() {
        var styles = {
             maxWidth:345,
@@ -45,7 +44,10 @@ class Recipe extends Component {
 
     return (    
         <div >
-            <Card style = {styles}>
+            <img src={stock3} className ='homeBackground' alt="Egg" data-aos="fade-up"/>
+
+            <div>
+             <Card data-aos="flip-left" style = {styles}>
                 <CardMedia>
                     <CardTitle>{this.state.Data.title}</CardTitle>
                     <img src = {this.state.Data.image}/>
@@ -53,7 +55,8 @@ class Recipe extends Component {
                 <CardText>
                 {this.state.Data.spoonacularSourceUrl} 
                 </CardText>
-            </Card>
+             </Card>
+            </div>
         </div>
       );
     
