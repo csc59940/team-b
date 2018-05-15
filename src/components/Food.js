@@ -45,8 +45,19 @@ handleChange(e){
 handleSubmit(e){
     e.preventDefault();
     
+    const itemsRef = firebase.database().ref('Ingredients');
+    const item = {
+      ingredients: this.state.ingredients
+      }
+
+    itemsRef.push(item);
+    console.log("pushed")
+    this.setState({
+      ingredients: ''
+    });
+      
     var config ={
-    headers: {'X-Mashape-Key': 'INSERT KEY'},
+    headers: {'X-Mashape-Key': ''},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
