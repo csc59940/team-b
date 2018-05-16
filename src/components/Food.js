@@ -57,7 +57,7 @@ handleSubmit(e){
     });
       
     var config ={
-    headers: {'X-Mashape-Key': 'z6KWuQ5qa6mshu6qKVywsW2aYVVHp1SRmq2jsnUGPD4ILgLmRQ'},
+    headers: {'X-Mashape-Key': 'INSERT KEY'},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
