@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Food from './Food';
+import { Switch, Route, Redirect } from 'react-router-dom';
+// import Food from './Food';
 import Home from './Home';
 import List from './List';
-import axios from 'axios'
-import * as firebase from 'firebase' 
+import Recipe from './Recipe';
+import Search from './Search';
+import Result from './Result';
+import axios from 'axios';
+import * as firebase from 'firebase';
 
 
 class Main extends Component {
@@ -13,66 +16,84 @@ class Main extends Component {
         super(props);
         this.state = {
            listOfIngredients: [],
+           currentIngredient: '',
+           currentResults: [],
+           searchStatus: 'selectIngredient',
+           currentRecipeResults: '',
+           listOfRecipes: [],
             
         };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.addIngredients = this.addIngredients.bind(this);
+    this.apiSearchIngredients = this.apiSearchIngredients.bind(this);
+    // this.addRecipes = this.addRecipes.bind(this);
+    this.apiSearchRecipe = this.apiSearchRecipe.bind(this);
   }
     
-	handleChange(e){
-	    const target = e.target;
-	    const name = target.name;
-	    const value = target.value;
-	    this.setState({
-	      [name]: value
-	    });
-	}
-	    
 
+	addIngredients(ingredient) {
+		const currentIngredient = ingredient.ingredients;
+	  	const listOfIngredients = this.state.listOfIngredients.concat(ingredient);
+	  	this.setState({listOfIngredients: listOfIngredients, currentIngredient: currentIngredient});
+	  	this.apiSearchIngredients(ingredient);
+	  }
 
-	handleSubmit(e){
-	    e.preventDefault();
-	    
-	    var config ={
-	    headers: {'X-Mashape-Key': 'sb7yRE1EkumshkKQaBfg6WrQFbsxp1U1JpCjsnuXQjzsuDMDaH'},
+	/*addRecipes(id) {
+	  	this.apiSearchRecipe(id).then(() => console.log('done too'));
+	  	console.log('done');
+	  	<Redirect from= '/food' to='/recipe' />
+	  	console.log('done2');
+	}*/
+
+	apiSearchIngredients(ingredient){
+		var config ={
+	    headers: {'X-Mashape-Key': 'INSERT KEY'},
 	    params: {
-	        fillIngredients: this.state.fillIngredients,
-	        ingredients: this.state.ingredients,
-	        number: this.state.number,
-	        ranking: this.state.ranking
+	        fillIngredients: ingredient.fillIngredients,
+	        ingredients: ingredient.ingredients,
+	        number: ingredient.number,
+	        ranking: ingredient.ranking
 	      }
-	}
+		}
 	    
 	    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
 	    ).then((response) => {
-	      console.log(response.data);
-	      console.log(response.data.id);
+	      const currentResults = response.data;
+	      console.log(currentResults);
 	      this.setState({
-	          Data: response.data,
-	    
+	      	currentResults: currentResults,
+	      	searchStatus: 'ingredientSubmitted' 
 	      });
-	        
-	      }).catch(function (error) {
-	        console.log(error);
-	      });
-	    
-	        
-	    
-	    
-	  }
+		});
+	}
 
-	  addIngredients(ingredient) {
-	  	const listOfIngredients = this.state.listOfIngredients.concat(ingredient);
-	  	this.setState({listOfIngredients: listOfIngredients});
-	  }
+	apiSearchRecipe(id){
+        var config ={
+            headers: {'X-Mashape-Key': 'INSERT KEY'},
+        }
+            axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id +"/information", config
+            ).then((response) => {
+              const currentRecipeResults = response.data;
+              const listOfRecipes = this.state.listOfRecipes.concat(currentRecipeResults);
+              console.log(currentRecipeResults);
+              this.setState({
+                  currentRecipeResults: currentRecipeResults,
+                  listOfRecipes: listOfRecipes,   
+              });
+              }).catch(function (error) {
+                console.log(error);
+              });
+        
+  	}
 
 	render() {
 		return (
 			<Switch>
 				<Route exact path='/' render={ ()=> <Home addIngredients= {this.addIngredients} />} />
-				<Route exact path='/food' render={ ()=> <Food />} />
 				<Route exact path='/list' render={ ()=> <List />} />
+				<Route exact path='/search' render={ ()=> <Search addIngredients= {this.addIngredients} />} />
+				<Route exact path='/result' render={ ()=> <Result Data= {this.state.currentResults} apiSearchRecipe= {this.apiSearchRecipe} />} />
+				<Route exact path='/recipe' render={ ()=> <Recipe Data= {this.state.currentRecipeResults} />} />
 			</Switch>
 		)
 	}

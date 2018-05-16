@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios'
 import * as firebase from 'firebase' 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,7 +9,9 @@ import FlatButton from 'material-ui/FlatButton';
 import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} from 'material-ui/Table';
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
-import Recipe from './Recipe.js';
+import Recipe from './Recipe';
+import Search from './Search';
+import Result from './Result';
 
 class Food extends Component {
     constructor(props) {
@@ -30,6 +33,19 @@ class Food extends Component {
     this.getIngredientID = this.getIngredientID.bind(this);
     this.getInstructions = this.getInstructions.bind(this);
   }
+
+  componentWillReceiveProps(nextProps){
+        if(nextProps.ingredients !== this.state.ingredients) {
+          const ingredients = nextProps.ingredients;
+          const Data = nextProps.Data;
+          const page = 'ingredientSubmitted';
+          this.setState({
+            ingredients: ingredients,
+            Data: Data,
+            page: page,
+          })
+        }
+  }
     
 handleChange(e){
     const target = e.target;
@@ -43,6 +59,7 @@ handleChange(e){
 
 
 handleSubmit(e){
+
     e.preventDefault();
     
     const itemsRef = firebase.database().ref('Ingredients');
@@ -84,26 +101,22 @@ handleSubmit(e){
         console.log(error);
       });
 
-
-     
+    this.props.addIngredients(this.state);
   }
+
+
 getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
     console.log(this.state.Data[index[0]].id);
    }
+
 getInstructions(e){
-  e.preventDefault();
-  this.setState({
-    page:'done',
-  })
+  this.props.apiSearchRecipe(this.state.foodID);
 }
 
     
   render() {
-       var styles = {
-            maxWidth:345,
-            margin:10
-        };  
+
 
         if(this.state.page ==='selectIngredient'){
     return (    
@@ -137,15 +150,19 @@ getInstructions(e){
             <FlatButton data-aos = "fade-up" primary ={true} onClick={this.getInstructions}
              label="View Recipe!"></FlatButton>
           </div>
+=======
 
-      )
-    }
-    else if (this.state.page ==='done'){
-      return(
-        <Recipe id ={this.state.foodID} />
-      )
-    }
+
+    return(
+          <Switch>
+               <Route exact path='/food' render={ ()=> <Search addIngredients= {this.addIngredients} />} />
+               <Route exact path='/food/results' render={ ()=> <Result apiSearchRecipe= {this.props.apiSearchRecipe} addIngredients= {this.props.addIngredients} ingredients= {this.state.ingredients} Data= {this.state.currentResults} page= {this.state.searchStatus}/>} />
+               <Route exact path='/food/recipe' render={ ()=> <Recipe Data= {this.state.currentRecipeResults} />} />
+             </Switch>
+          )
+
   }
 }
 
 export default Food;
+*/

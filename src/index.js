@@ -25,7 +25,7 @@ var config = {
 
 
 ReactDOM.render((
-	<BrowserRouter>
+	<BrowserRouter >
 		<MuiThemeProvider>
 			<App />
 		</MuiThemeProvider>
