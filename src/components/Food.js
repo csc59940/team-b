@@ -57,7 +57,7 @@ handleSubmit(e){
     });
       
     var config ={
-    headers: {'X-Mashape-Key': ''},
+    headers: {'X-Mashape-Key': 'z6KWuQ5qa6mshu6qKVywsW2aYVVHp1SRmq2jsnUGPD4ILgLmRQ'},
     params: {
         fillIngredients: this.state.fillIngredients,
         ingredients: this.state.ingredients,
@@ -135,7 +135,7 @@ getInstructions(e){
               </TableBody>
             </Table>
             <FlatButton data-aos = "fade-up" primary ={true} onClick={this.getInstructions}
-             label="View Instructions!"></FlatButton>
+             label="View Recipe!"></FlatButton>
           </div>
 
       )
