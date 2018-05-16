@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios'
 import * as firebase from 'firebase' 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,7 +9,9 @@ import FlatButton from 'material-ui/FlatButton';
 import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} from 'material-ui/Table';
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
-import Recipe from './Recipe.js';
+import Recipe from './Recipe';
+import Search from './Search';
+import Result from './Result';
 
 class Food extends Component {
     constructor(props) {
@@ -30,6 +33,19 @@ class Food extends Component {
     this.getIngredientID = this.getIngredientID.bind(this);
     this.getInstructions = this.getInstructions.bind(this);
   }
+
+  componentWillReceiveProps(nextProps){
+        if(nextProps.ingredients !== this.state.ingredients) {
+          const ingredients = nextProps.ingredients;
+          const Data = nextProps.Data;
+          const page = 'ingredientSubmitted';
+          this.setState({
+            ingredients: ingredients,
+            Data: Data,
+            page: page,
+          })
+        }
+  }
     
 handleChange(e){
     const target = e.target;
@@ -43,98 +59,33 @@ handleChange(e){
 
 
 handleSubmit(e){
-    e.preventDefault();
-    
-    var config ={
-    headers: {'X-Mashape-Key': 'INSERT KEY'},
-    params: {
-        fillIngredients: this.state.fillIngredients,
-        ingredients: this.state.ingredients,
-        number: this.state.number,
-        ranking: this.state.ranking
-      }
-}
-
-
-    
-    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
-    ).then((response) => {
-      console.log(response.data);
-      console.log(response.data[0].id);
-      console.log(response.id);
-      this.setState({
-          Data: response.data,
-          page: 'ingredientSubmitted',
-         
-      });
-
-        console.log(this.state.Data);
-      }).catch(function (error) {
-        console.log(error);
-      });
-
-
-     
+    this.props.addIngredients(this.state);
   }
+
+
 getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
     console.log(this.state.Data[index[0]].id);
    }
+
 getInstructions(e){
-  e.preventDefault();
-  this.setState({
-    page:'done',
-  })
+  this.props.apiSearchRecipe(this.state.foodID);
 }
 
     
   render() {
-       var styles = {
-            maxWidth:345,
-            margin:10
-        };  
 
-        if(this.state.page ==='selectIngredient'){
-    return (    
-      <div >
-        <TextField
-            floatingLabelText="Ingredients" name="ingredients" floatingLabelText="Your Ingredients" floatingLabelFixed={true} hintText="Choose an ingredient"  onChange={this.handleChange}/>
-                
-            <FlatButton label="Search" primary={true} onClick={this.handleSubmit}/>
-        
-      </div>
-      );
-    }
-    else if (this.state.page === 'ingredientSubmitted'){
-      return(
-          <div data-aos = "fade-up">
-            <Table  onRowSelection = {this.getIngredientID}>
-              <TableHeader>
-                <TableRow>
-                  <TableHeaderColumn>Recipe Title</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody deselectOnClickaway={false}>
-                {this.state.Data.map((data,index)=>
-                  <TableRow key = {index} value = {data.id}>
-                  <TableRowColumn>{data.title} </TableRowColumn>
-                  
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-            <FlatButton data-aos = "fade-up" primary ={true} onClick={this.getInstructions}
-             label="View Instructions!"></FlatButton>
-          </div>
 
-      )
-    }
-    else if (this.state.page ==='done'){
-      return(
-        <Recipe id ={this.state.foodID} />
-      )
-    }
+    return(
+          <Switch>
+               <Route exact path='/food' render={ ()=> <Search addIngredients= {this.addIngredients} />} />
+               <Route exact path='/food/results' render={ ()=> <Result apiSearchRecipe= {this.props.apiSearchRecipe} addIngredients= {this.props.addIngredients} ingredients= {this.state.ingredients} Data= {this.state.currentResults} page= {this.state.searchStatus}/>} />
+               <Route exact path='/food/recipe' render={ ()=> <Recipe Data= {this.state.currentRecipeResults} />} />
+             </Switch>
+          )
+
   }
 }
 
 export default Food;
+*/

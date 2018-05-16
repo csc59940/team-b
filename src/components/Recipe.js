@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import * as firebase from 'firebase' 
+import axios from 'axios';
+import * as firebase from 'firebase';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -15,28 +15,20 @@ class Recipe extends Component {
         this.state = {
             Data:'',
         };
+    }
+
+
+    componentWillReceiveProps(nextProps){
+      if(nextProps.Data !== this.state.Data){
+        const Data = nextProps.Data;
+        this.setState({
+          Data: Data
+        });
+      }
+    }
     
 
-        var config ={
-            headers: {'X-Mashape-Key': 'INSERT KEY'},
-        }
-            axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + this.props.id + "/information", config
-            ).then((response) => {
-              console.log(response.data);
-              console.log(response.data.id);
-              this.setState({
-                  Data: response.data,   
-              });
-              console.log(this.state.Data);
-              }).catch(function (error) {
-                console.log(error);
-              });
-        
-  }
-
-    
-
-    
+  
   render() {
        var styles = {
             maxWidth:345,
@@ -58,9 +50,11 @@ class Recipe extends Component {
       );
     
     
-      
+   }   
     
-  }
+
+
+
 }
 
 
