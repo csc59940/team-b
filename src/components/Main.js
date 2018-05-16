@@ -8,6 +8,7 @@ import Search from './Search';
 import Result from './Result';
 import axios from 'axios';
 import * as firebase from 'firebase';
+import base from '../base'
 
 
 class Main extends Component {
@@ -29,6 +30,39 @@ class Main extends Component {
     // this.addRecipes = this.addRecipes.bind(this);
     this.apiSearchRecipe = this.apiSearchRecipe.bind(this);
   }
+    
+    componentDidMount(){
+	   this.ingredientsRef = base.syncState('Ingredients', {
+           context: this,
+           state: 'listOfIngredients',
+           asArray: true
+       });
+        
+        
+    /*const itemsRef = firebase.database().ref('Ingredients');
+	itemsRef.on('child_added',(snapshot)=>{
+		console.log(snapshot.val());
+		let items = snapshot.val();
+		let newState = [];
+		for(let item in items){
+			newState.push({
+				ingredients:item.ingredients	
+			})
+		}
+		this.setState({
+			prev:newState
+			
+		});
+		console.log(this.state.prev);
+	
+	});*/
+    }
+    
+    componentWillUnmount(){
+        base.removeBinding(this.ingredientsRef);
+    }
+    
+
     
 
 	addIngredients(ingredient) {
@@ -90,7 +124,7 @@ class Main extends Component {
 		return (
 			<Switch>
 				<Route exact path='/' render={ ()=> <Home addIngredients= {this.addIngredients} />} />
-				<Route exact path='/list' render={ ()=> <List />} />
+				<Route exact path='/list' render={ ()=> <List prev= {this.state.listOfIngredients}/>} />
 				<Route exact path='/search' render={ ()=> <Search addIngredients= {this.addIngredients} />} />
 				<Route exact path='/result' render={ ()=> <Result Data= {this.state.currentResults} apiSearchRecipe= {this.apiSearchRecipe} />} />
 				<Route exact path='/recipe' render={ ()=> <Recipe Data= {this.state.currentRecipeResults} />} />
