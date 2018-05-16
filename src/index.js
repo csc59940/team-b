@@ -11,7 +11,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render((
-	<BrowserRouter>
+	<BrowserRouter >
 		<MuiThemeProvider>
 			<App />
 		</MuiThemeProvider>

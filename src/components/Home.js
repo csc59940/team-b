@@ -33,7 +33,7 @@ class Home extends Component {
 	}
 
 	handleSubmit(e) {
-		e.preventDefault();
+		
 		this.props.addIngredients(this.state);
 	}
 
@@ -50,7 +50,7 @@ class Home extends Component {
 					<form className="align-items-end">
 						<textarea className="form-control w-75 mt-5"  rows="10" type="text" name="ingredients" onChange={this.handleChange} placeholder="Enter ingredients..."></textarea>
 						<Link to={"/list"} className="text-white"> <button type="submit" id="previousList" className="btn btn-dark btn-lg align-items-end mt-3 ml-5" role="button">  Previous List  </button> </Link>
-						<Link to={"/food"} className="text-white"> <button type="submit" id="findRecipes" className="btn btn-success btn-lg align-items-end mt-3 ml-5" onClick={this.handleSubmit} role="button">  Find recipes  </button> </Link>
+						<Link to={"/result"} className="text-white"> <button type="submit" id="findRecipes" className="btn btn-success btn-lg align-items-end mt-3 ml-5" onClick={this.handleSubmit} role="button">  Find recipes  </button> </Link>
 					</form>
 				</div>
 				</div>
