@@ -39,7 +39,7 @@ class Home extends Component {
 
 	render() {
 		return (
-			<div className= "mh-100 homepage d-flex flex-column">
+			<div className= "mh-100 homepage d-flex flex-column" data-aos="fade-up"> 
 				<img src="/img/brooke-lark-609905-unsplash.jpg" alt="" className="homeBackground" />
 				<div className="row ">
 				<div className="col-md-6 align-items-start justify-content-start">
