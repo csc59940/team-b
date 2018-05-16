@@ -59,6 +59,48 @@ handleChange(e){
 
 
 handleSubmit(e){
+
+    e.preventDefault();
+    
+    const itemsRef = firebase.database().ref('Ingredients');
+    const item = {
+      ingredients: this.state.ingredients
+      }
+
+    itemsRef.push(item);
+    console.log("pushed")
+    this.setState({
+      ingredients: ''
+    });
+      
+    var config ={
+    headers: {'X-Mashape-Key': 'INSERT KEY'},
+    params: {
+        fillIngredients: this.state.fillIngredients,
+        ingredients: this.state.ingredients,
+        number: this.state.number,
+        ranking: this.state.ranking
+      }
+}
+
+
+    
+    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
+    ).then((response) => {
+      console.log(response.data);
+      console.log(response.data[0].id);
+      console.log(response.id);
+      this.setState({
+          Data: response.data,
+          page: 'ingredientSubmitted',
+         
+      });
+
+        console.log(this.state.Data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+
     this.props.addIngredients(this.state);
   }
 
@@ -74,6 +116,41 @@ getInstructions(e){
 
     
   render() {
+
+
+        if(this.state.page ==='selectIngredient'){
+    return (    
+      <div >
+        <TextField
+            floatingLabelText="Ingredients" name="ingredients" floatingLabelText="Your Ingredients" floatingLabelFixed={true} hintText="Choose an ingredient"  onChange={this.handleChange}/>
+                
+            <FlatButton label="Search" primary={true} onClick={this.handleSubmit}/>
+        
+      </div>
+      );
+    }
+    else if (this.state.page === 'ingredientSubmitted'){
+      return(
+          <div data-aos = "fade-up">
+            <Table  onRowSelection = {this.getIngredientID}>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderColumn>Recipe Title</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody deselectOnClickaway={false}>
+                {this.state.Data.map((data,index)=>
+                  <TableRow key = {index} value = {data.id}>
+                  <TableRowColumn>{data.title} </TableRowColumn>
+                  
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <FlatButton data-aos = "fade-up" primary ={true} onClick={this.getInstructions}
+             label="View Recipe!"></FlatButton>
+          </div>
+=======
 
 
     return(
