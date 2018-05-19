@@ -8,6 +8,9 @@ import FlatButton from 'material-ui/FlatButton';
 import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} from 'material-ui/Table';
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
+import { NavLink } from 'react-router-dom';
+import '../css/Header.css';
+
 
 class Recipe extends Component {
     constructor(props) {
@@ -15,6 +18,7 @@ class Recipe extends Component {
         this.state = {
             Data:'',
         };
+        console.log(this.state.Data.spoonacularSourceUrl);
     }
 
 
@@ -35,15 +39,23 @@ class Recipe extends Component {
             margin:10
         };  
 
-    return (    
-        <div >
-            <Card style = {styles}>
+    return ( 
+        
+        <div data-aos ="fade-up">
+            <Card data-aos ="fade-up">
                 <CardMedia>
                     <CardTitle>{this.state.Data.title}</CardTitle>
                     <img src = {this.state.Data.image}/>
                 </CardMedia>
                 <CardText>
-                {this.state.Data.spoonacularSourceUrl} 
+                    <h1>Ready in {this.state.Data.readyInMinutes} Minutes</h1>
+                    <p>{this.state.Data.instructions}</p>
+
+
+                   <a target="_blank" href={this.state.Data.spoonacularSourceUrl}>
+                     <FlatButton label="Link" />
+                   </a>
+               
                 </CardText>
             </Card>
         </div>
