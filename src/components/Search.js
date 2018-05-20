@@ -10,8 +10,8 @@ import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} f
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
 import Recipe from './Recipe.js';
-
-
+import avocado from '../images/avocado.jpg';
+import '../css/Home.css';
 
 class Search extends Component {
 
@@ -46,18 +46,23 @@ class Search extends Component {
 
 
 	render(){
-		var styles = {
-            maxWidth:345,
-            margin:10
-        };  
+	
         
 		return (    
 	      <div >
+			  <img src={avocado} className ='secondBackground' alt="Egg" data-aos="flip-up"/>
 	        <TextField
-	            floatingLabelText="Ingredients" name="ingredients" floatingLabelText="Your Ingredients" floatingLabelFixed={true} hintText="Choose an ingredient"  onChange={this.handleChange}/>
+				style={{marginLeft:'600px'}}
+				data-aos="fade-up"
+				floatingLabelText="Ingredients" 
+				name="ingredients" 
+				floatingLabelText="Your Ingredients" 
+				floatingLabelFixed={true} 
+				hintText="List Your Ingredients"  
+				onChange={this.handleChange}/>
 	                
 	            <Link to='/result' className='text-primary'> <FlatButton label="Search" primary={true} onClick={this.handleSubmit}/> </Link>
-	        
+	      
 	      </div>
 	      );
 	}
