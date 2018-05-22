@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as firebase from 'firebase';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card,CardActions, CardHeader, CardMedia,CardTitle,CardText,CardContent} from 'material-ui/Card';
+
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} from 'material-ui/Table';
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
+import { NavLink } from 'react-router-dom';
+import '../css/Header.css';
+import '../css/Recipe.css';
+import Typography from 'material-ui/styles/typography';
+
 
 class Recipe extends Component {
     constructor(props) {
@@ -15,6 +22,7 @@ class Recipe extends Component {
         this.state = {
             Data:'',
         };
+        console.log(this.state.Data.spoonacularSourceUrl);
     }
 
 
@@ -34,20 +42,47 @@ class Recipe extends Component {
        var styles = {
             maxWidth:345,
             margin:10
-        };  
+        }; 
+        
+        var picStyle = {
+            height: 32,
+          };
 
-    return (    
-        <div >
-            <Card style = {styles}>
+    return ( 
+        
+        <div>
+           
+            <div data-aos ="fade-up">
+            <Card data-aos ="fade-up" className="center">
                 <CardMedia>
-                    <CardTitle>{this.state.Data.title}</CardTitle>
-                    <img src = {this.state.Data.image}/>
+                    <img src = {this.state.Data.image} className="img"/>
+                    <CardTitle style={{textAlign:'center'}}><h1>{this.state.Data.title}</h1></CardTitle>
                 </CardMedia>
+              
                 <CardText>
-                {this.state.Data.spoonacularSourceUrl} 
+                    <p>{this.state.Data.instructions}</p>
+                    <a target="_blank" href={this.state.Data.spoonacularSourceUrl}>
+                     <RaisedButton secondary={true} label="Detailed Instructions" style={{marginLeft:'150px'}}/>
+                   </a>
                 </CardText>
+                {/* 
+                     <CardTitle style={{textAlign:'center'}}><h1>{this.state.Data.title}</h1></CardTitle>
+                    <CardText>
+                    <h2 style={{textAlign:'center'}}>Ready in {this.state.Data.readyInMinutes} Minutes</h2>
+                    <p>{this.state.Data.instructions}</p>
+                    <a target="_blank" href={this.state.Data.spoonacularSourceUrl}>
+                     <RaisedButton secondary={true} label="Detailed Instructions" style={{marginLeft:'150px'}}/>
+                   </a>
+               
+                </CardText> */}
+             
             </Card>
+            </div>
+        
+            <div>
+            </div>
         </div>
+        
       );
     
     
