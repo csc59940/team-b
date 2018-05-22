@@ -28,7 +28,7 @@ class List extends Component {
 			  height: '320px',
 			  padding:'25px',
 			  margin:'25px',
-			 
+			  backgroundColor:'#b3ffd6'
 	    };
 		const textDescription={
 			textAlign:'center',
