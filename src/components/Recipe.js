@@ -43,7 +43,7 @@ class Recipe extends Component {
                     <img src = {this.state.Data.image}/>
                 </CardMedia>
                 <CardText>
-                {this.state.Data.spoonacularSourceUrl} 
+                {this.state.Data.spoonacularSourceUrl}
                 </CardText>
             </Card>
         </div>

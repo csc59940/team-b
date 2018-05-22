@@ -55,12 +55,21 @@ class Result extends Component {
 	              <TableHeader>
 	                <TableRow>
 	                  <TableHeaderColumn>Recipe Title</TableHeaderColumn>
+										<TableHeaderColumn>Image</TableHeaderColumn>
+										<TableHeaderColumn>Likes</TableHeaderColumn>
+										<TableHeaderColumn>Number of Ingredients You Have</TableHeaderColumn>
+
 	                </TableRow>
 	              </TableHeader>
+
 	              <TableBody deselectOnClickaway={false}>
 	                {this.state.Data.map((data,index)=>
 	                  <TableRow key = {index} value = {data.id}>
 	                  <TableRowColumn>{data.title} </TableRowColumn>
+										<TableRowColumn>img src ={data.image} </TableRowColumn>
+	                  <TableRowColumn>{data.likes} </TableRowColumn>
+	                  <TableRowColumn>{data.missedIngredientCount} </TableRowColumn>
+
 	                  
 	                  </TableRow>
 	                )}
