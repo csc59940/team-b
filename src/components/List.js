@@ -29,7 +29,7 @@ class List extends Component {
 			  padding:'25px',
 			  margin:'25px',
 			 
-	};
+	    };
 		const textDescription={
 			textAlign:'center',
 			fontSize:'25px',
