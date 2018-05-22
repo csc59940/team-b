@@ -36,13 +36,16 @@ class Result extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		debugger;
         if(nextProps.Data !== this.state.Data) {
           const Data = nextProps.Data;
           this.setState({
             Data: Data
           })
         }
+  	}
+
+  	componentDidMount(){
+  		debugger;
   	}
 
 	render() {
