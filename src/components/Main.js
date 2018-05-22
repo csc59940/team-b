@@ -81,7 +81,7 @@ class Main extends Component {
 
 	apiSearchIngredients(ingredient){
 		var config ={
-	    headers: {'X-Mashape-Key': 'YAwaCavsC5mshP9NjyAw8Ufn6JYzp1VE5wgjsnAcVd1iv5Ukum'},
+	    headers: {'X-Mashape-Key': 'INSERT API KEY'},
 	    params: {
 	        fillIngredients: ingredient.fillIngredients,
 	        ingredients: ingredient.ingredients,
@@ -103,7 +103,7 @@ class Main extends Component {
 
 	apiSearchRecipe(id){
         var config ={
-            headers: {'X-Mashape-Key': 'YAwaCavsC5mshP9NjyAw8Ufn6JYzp1VE5wgjsnAcVd1iv5Ukum'},
+            headers: {'X-Mashape-Key': 'INSERT API KEY'},
         }
             axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id +"/information", config
             ).then((response) => {
