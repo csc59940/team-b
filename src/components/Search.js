@@ -50,7 +50,7 @@ class Search extends Component {
         
 		return (    
 	      <div >
-			  <img src={avocado} className ='secondBackground' alt="Egg" data-aos="flip-up"/>
+			  <img src={avocado} className ='secondBackground' alt="Avocado" data-aos="flip-up"/>
 	        <TextField
 				style={{marginLeft:'600px'}}
 				data-aos="fade-up"

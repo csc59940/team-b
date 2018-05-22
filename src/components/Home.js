@@ -11,7 +11,7 @@ class Home extends Component {
 		this.state = {
 			fillIngredients: true,
             ingredients: '',
-            number: 5,
+            number: 6,
             ranking: 1, 
             Data: [],
             foodID:939682,

@@ -10,8 +10,8 @@ import {Table,TableBody,TableHeader,TableRow,TableRowColumn,TableHeaderColumn} f
 import index from 'material-ui/FlatButton';
 import * as AOS from 'aos';
 import Recipe from './Recipe.js';
-
-
+import noodles from '../images/noodles.webp';
+import '../css/Home.css';
 
 class Result extends Component {
 
@@ -51,16 +51,26 @@ class Result extends Component {
         };  
 	    return (
 	          <div data-aos = "fade-up">
+
 	            <Table  onRowSelection = {this.getIngredientID}>
 	              <TableHeader>
-	                <TableRow>
+								<TableRow>
 	                  <TableHeaderColumn>Recipe Title</TableHeaderColumn>
+										<TableHeaderColumn>Image</TableHeaderColumn>
+										<TableHeaderColumn>Likes</TableHeaderColumn>
+										<TableHeaderColumn>Number of Ingredients You Have</TableHeaderColumn>
+
 	                </TableRow>
 	              </TableHeader>
+
 	              <TableBody deselectOnClickaway={false}>
 	                {this.state.Data.map((data,index)=>
 	                  <TableRow key = {index} value = {data.id}>
 	                  <TableRowColumn>{data.title} </TableRowColumn>
+										<TableRowColumn><img src ={data.image}/> </TableRowColumn>
+	                  <TableRowColumn>{data.likes} </TableRowColumn>
+	                  <TableRowColumn>{data.missedIngredientCount} </TableRowColumn>
+
 	                  
 	                  </TableRow>
 	                )}
