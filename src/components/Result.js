@@ -28,7 +28,6 @@ class Result extends Component {
 
 	getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
-    console.log(this.state.Data[index[0]].id);
    }
 
 	getInstructions(e){
@@ -43,11 +42,6 @@ class Result extends Component {
           })
         }
   	}
-
-  	componentDidMount(){
-  		debugger;
-  	}
-
 	render() {
 		var styles = {
             maxWidth:345,
