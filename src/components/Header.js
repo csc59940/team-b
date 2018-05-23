@@ -19,7 +19,7 @@ class Header extends Component {
 						<NavLink to= {"/search"} className= "nav-link text-danger" href= "#">New Search</NavLink>
 					</li>
 					<li className= "nav-item">
-						<NavLink to= {"/list"} className= "nav-link text-danger" href= "#">Previous Researches</NavLink>
+						<NavLink to= {"/list"} className= "nav-link text-danger" href= "#">Previous Searches</NavLink>
 					</li>
 				</ul>
 			</nav>

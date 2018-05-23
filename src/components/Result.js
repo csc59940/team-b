@@ -28,7 +28,6 @@ class Result extends Component {
 
 	getIngredientID(index){
     this.state.foodID = this.state.Data[index[0]].id;
-    console.log(this.state.Data[index[0]].id);
    }
 
 	getInstructions(e){
@@ -43,7 +42,6 @@ class Result extends Component {
           })
         }
   	}
-
 	render() {
 		var styles = {
             maxWidth:345,
@@ -58,7 +56,7 @@ class Result extends Component {
 	                  <TableHeaderColumn>Recipe Title</TableHeaderColumn>
 										<TableHeaderColumn>Image</TableHeaderColumn>
 										<TableHeaderColumn>Likes</TableHeaderColumn>
-										<TableHeaderColumn>Number of Ingredients You Have</TableHeaderColumn>
+										
 
 	                </TableRow>
 	              </TableHeader>
@@ -69,7 +67,7 @@ class Result extends Component {
 	                  <TableRowColumn>{data.title} </TableRowColumn>
 										<TableRowColumn><img src ={data.image}/> </TableRowColumn>
 	                  <TableRowColumn>{data.likes} </TableRowColumn>
-	                  <TableRowColumn>{data.missedIngredientCount} </TableRowColumn>
+	                  
 
 	                  
 	                  </TableRow>

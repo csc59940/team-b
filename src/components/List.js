@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as firebase from 'firebase';
 import {GridList,  GridListTile, GridListTileBar } from 'material-ui/GridList';
+import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card,CardActions, CardHeader, CardMedia,CardTitle,CardText,CardContent} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,13 +14,18 @@ class List extends Component {
 		this.state = {
 			prev:[]
 		}
-		console.log(this.state.prev);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	handleSubmit(e) {
-		
-		this.props.apiSearchRecipe(this.props.prev.ingredients);
+		let ingredients = e.target.textContent;
+		let data = {
+						fillIngredients: true,
+            			ingredients: ingredients,
+            			number: 5,
+            			ranking: 1,
+					}
+		this.props.apiSearchIngredients(data);
 	}
 
 	render() {
@@ -45,11 +51,11 @@ class List extends Component {
                                 this.props.prev.map((data,index) =>{
                                     return (
 								<div>
-									<Card key ={index} style ={cardDescription} data-aos ="fade-up">
-										<CardText style ={textDescription}>
+									<Link to='/result' > <Card key ={index} style ={cardDescription} data-aos ="fade-up" onClick={this.handleSubmit}>
+										<CardText style ={textDescription} >
 										{data.ingredients}
-										</CardText>
-									</Card>
+										</CardText> 
+									</Card> </Link>
 								</div>
                                     );
                                 })

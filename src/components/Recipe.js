@@ -22,7 +22,6 @@ class Recipe extends Component {
         this.state = {
             Data:'',
         };
-        console.log(this.state.Data.spoonacularSourceUrl);
     }
 
 
@@ -34,6 +33,7 @@ class Recipe extends Component {
         });
       }
     }
+    
     
 
   
@@ -64,17 +64,6 @@ class Recipe extends Component {
                      <RaisedButton secondary={true} label="Detailed Instructions" style={{marginLeft:'150px'}}/>
                    </a>
                 </CardText>
-                {/* 
-                     <CardTitle style={{textAlign:'center'}}><h1>{this.state.Data.title}</h1></CardTitle>
-                    <CardText>
-                    <h2 style={{textAlign:'center'}}>Ready in {this.state.Data.readyInMinutes} Minutes</h2>
-                    <p>{this.state.Data.instructions}</p>
-                    <a target="_blank" href={this.state.Data.spoonacularSourceUrl}>
-                     <RaisedButton secondary={true} label="Detailed Instructions" style={{marginLeft:'150px'}}/>
-                   </a>
-               
-                </CardText> */}
-             
             </Card>
             </div>
         
