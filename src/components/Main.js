@@ -7,7 +7,8 @@ import Search from './Search';
 import Result from './Result';
 import axios from 'axios';
 import * as firebase from 'firebase';
-import base from '../base'
+import base from '../base';
+import rapidAPIInfo from '../config/rapidAPIInfo';
 
 
 class Main extends Component {
@@ -49,8 +50,9 @@ class Main extends Component {
 	  }
 
 	apiSearchIngredients(ingredient){
+		var apiKey = rapidAPIInfo.RapidAPIKey;
 		var config ={
-	    headers: {'X-Mashape-Key': 'INSERT API KEY'},
+	    headers: {'X-RapidAPI-Key': apiKey},
 	    params: {
 	        fillIngredients: ingredient.fillIngredients,
 	        ingredients: ingredient.ingredients,
@@ -59,7 +61,7 @@ class Main extends Component {
 	      }
 		}
 	    
-	    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients", config
+	    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients", config
 	    ).then((response) => {
 	      const currentResults = response.data;
 	      this.setState({
@@ -70,10 +72,11 @@ class Main extends Component {
 	}
 
 	apiSearchRecipe(id){
+		var apiKey = rapidAPIInfo.RapidAPIKey;
         var config ={
-            headers: {'X-Mashape-Key': 'INSERT API KEY'},
+            headers: {'X-RapidAPI-Key': apiKey},
         }
-            axios.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id +"/information", config
+            axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id +"/information", config
             ).then((response) => {
               const currentRecipeResults = response.data;
               const listOfRecipes = this.state.listOfRecipes.concat(currentRecipeResults);
