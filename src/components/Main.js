@@ -8,7 +8,7 @@ import Result from './Result';
 import axios from 'axios';
 import * as firebase from 'firebase';
 import base from '../base';
-import rapidAPIInfo from '../config/rapidAPIInfo';
+import RapidAPIKey from '../config/rapidAPIInfo';
 
 
 class Main extends Component {
@@ -50,9 +50,8 @@ class Main extends Component {
 	  }
 
 	apiSearchIngredients(ingredient){
-		var apiKey = rapidAPIInfo.RapidAPIKey;
 		var config ={
-	    headers: {'X-RapidAPI-Key': apiKey},
+	    headers: {'X-RapidAPI-Key': RapidAPIKey},
 	    params: {
 	        fillIngredients: ingredient.fillIngredients,
 	        ingredients: ingredient.ingredients,
@@ -72,9 +71,8 @@ class Main extends Component {
 	}
 
 	apiSearchRecipe(id){
-		var apiKey = rapidAPIInfo.RapidAPIKey;
         var config ={
-            headers: {'X-RapidAPI-Key': apiKey},
+            headers: {'X-RapidAPI-Key': RapidAPIKey},
         }
             axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id +"/information", config
             ).then((response) => {

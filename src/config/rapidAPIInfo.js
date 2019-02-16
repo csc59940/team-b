@@ -1,6 +1,6 @@
 
 
-const RapidAPIKey = "dadb7aaa8dmsh7debbe54e773c83p1336aajsn16a22c6ea2b1";
+const rapidAPIKey = "01102fbbeemsh4c23ddbea4694acp139dfcjsn8ee52567cc2f";
 
 
-export default rapidAPIInfo;
+export default rapidAPIKey;

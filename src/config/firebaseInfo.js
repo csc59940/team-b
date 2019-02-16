@@ -8,4 +8,4 @@ const config = {
   };
 
 
-  export default firebaseInfo;
+  export default config;
